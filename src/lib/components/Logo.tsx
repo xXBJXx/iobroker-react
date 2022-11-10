@@ -1,4 +1,4 @@
-import LogoRA from "@iobroker/adapter-react-v5/components/Logo";
+import LogoRA from "@iobroker/adapter-react-v5/Components/Logo";
 import React from "react";
 import { useDialogs } from "../hooks/useDialogs";
 import { useGlobals } from "../hooks/useGlobals";
