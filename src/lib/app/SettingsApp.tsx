@@ -37,9 +37,9 @@ function parseSettings(
 	const settings: Record<string, any> = { ...obj.native };
 	for (const field of encryptedFields) {
 		if (typeof settings[field] === "string") {
+			console.log("settings[field]1 ", settings[field]);
 			settings[field] = decrypt(secret, settings[field]);
-			console.log(`decrypted ${field}`);
-			console.log("settings[field] ", settings[field]);
+			console.log("settings[field]2 ", settings[field]);
 		}
 	}
 	console.log("parseSettings ", settings);
