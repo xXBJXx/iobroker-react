@@ -102,7 +102,7 @@ const SettingsAppContent: React.FC<
 				props.encryptedFields ?? [],
 				secret,
 			);
-			console.log("settings", settings);
+
 			// Transform loaded settings if desired
 			if (typeof props.afterLoad === "function") {
 				props.afterLoad(settings);
@@ -110,7 +110,7 @@ const SettingsAppContent: React.FC<
 
 			setSettings(settings);
 			setOriginalSettings({ ...settings });
-
+			console.log("settings", settings);
 			// Notify that the settings are loaded and the spinner can be hidden
 			props.onSettingsLoaded();
 		}
@@ -124,6 +124,7 @@ const SettingsAppContent: React.FC<
 		setChanged(
 			JSON.stringify(settings) !== JSON.stringify(originalSettings),
 		);
+		console.log("changed", changed);
 	}, [originalSettings, settings]);
 
 	// Detect errors
@@ -154,6 +155,8 @@ const SettingsAppContent: React.FC<
 				native: newNative,
 			};
 			await setInstanceObj(newInstanceObj);
+			console.log("Saved settings");
+			console.log(newInstanceObj);
 			// Updating the settings worked
 			setSettings(newNative);
 			setOriginalSettings(newNative);
