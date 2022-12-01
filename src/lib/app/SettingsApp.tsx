@@ -38,8 +38,11 @@ function parseSettings(
 	for (const field of encryptedFields) {
 		if (typeof settings[field] === "string") {
 			settings[field] = decrypt(secret, settings[field]);
+			console.log(`decrypted ${field}`);
+			console.log("settings[field] ", settings[field]);
 		}
 	}
+	console.log("parseSettings ", settings);
 	return settings;
 }
 
@@ -83,6 +86,7 @@ const SettingsAppContent: React.FC<
 	const [systemConfigObj] = useIoBrokerObject("system.config");
 	// const systemConfig = systemConfigObj?.common;
 	const secret = systemConfigObj?.native?.secret || "Zgfr56gFe87jJOM";
+	console.log("secret", secret);
 
 	// Parse and decrypt settings when instance object is loaded or changed
 	const { namespace } = useGlobals();
@@ -98,6 +102,7 @@ const SettingsAppContent: React.FC<
 				props.encryptedFields ?? [],
 				secret,
 			);
+			console.log("settings", settings);
 			// Transform loaded settings if desired
 			if (typeof props.afterLoad === "function") {
 				props.afterLoad(settings);
