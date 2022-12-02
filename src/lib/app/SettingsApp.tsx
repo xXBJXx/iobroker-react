@@ -171,7 +171,6 @@ const SettingsAppContent: React.FC<
 						setError: setHasErrors,
 					}}
 				>
-					{/*<div className={classes.root}>*/}
 					<Box
 						component="div"
 						sx={{
@@ -180,7 +179,6 @@ const SettingsAppContent: React.FC<
 							height: "100%",
 						}}
 					>
-						{/*<div className={classes.main}>{props.children}</div>*/}
 						<Box
 							component="div"
 							sx={{
@@ -189,24 +187,20 @@ const SettingsAppContent: React.FC<
 							}}
 						>
 							{props.children}
-
-							{/*<div className={classes.buttons}>*/}
-							<Box
-								component="div"
-								sx={{
-									flex: "0 0 auto",
-								}}
-							>
-								<SaveCloseButtons
-									changed={changed}
-									hasErrors={hasErrors}
-									onSave={onSave}
-									onClose={closeSettingsWindow}
-								/>
-							</Box>
-							{/*</div>*/}
 						</Box>
-						{/*</div>*/}
+						<Box
+							component="div"
+							sx={{
+								flex: "0 0 auto",
+							}}
+						>
+							<SaveCloseButtons
+								changed={changed}
+								hasErrors={hasErrors}
+								onSave={onSave}
+								onClose={closeSettingsWindow}
+							/>
+						</Box>
 					</Box>
 				</SettingsContext.Provider>
 			)}
