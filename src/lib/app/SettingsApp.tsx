@@ -1,5 +1,6 @@
+import { Box } from "@mui/material";
 import type { Theme } from "@mui/material/styles";
-import { createStyles, makeStyles } from "@mui/styles";
+// import { createStyles, makeStyles } from "@mui/styles";
 import React from "react";
 import SaveCloseButtons from "../components/SaveCloseButtons";
 import { useGlobals } from "../hooks/useGlobals";
@@ -37,31 +38,28 @@ function parseSettings(
 	const settings: Record<string, any> = { ...obj.native };
 	for (const field of encryptedFields) {
 		if (typeof settings[field] === "string") {
-			console.log("settings[field]1 ", settings[field]);
 			settings[field] = decrypt(secret, settings[field]);
-			console.log("settings[field]2 ", settings[field]);
 		}
 	}
-	console.log("parseSettings ", settings);
 	return settings;
 }
 
-const useStyles = makeStyles((theme: Theme) =>
-	createStyles({
-		root: {
-			display: "flex",
-			flexFlow: "column nowrap",
-			height: "100%",
-		},
-		main: {
-			flex: "1 1 auto",
-			padding: theme.spacing(2, 4),
-		},
-		buttons: {
-			flex: "0 0 auto",
-		},
-	}),
-);
+// const useStyles = makeStyles((theme: Theme) =>
+// 	createStyles({
+// 		root: {
+// 			display: "flex",
+// 			flexFlow: "column nowrap",
+// 			height: "100%",
+// 		},
+// 		main: {
+// 			flex: "1 1 auto",
+// 			padding: theme.spacing(2, 4),
+// 		},
+// 		buttons: {
+// 			flex: "0 0 auto",
+// 		},
+// 	}),
+// );
 
 const closeSettingsWindow = () => {
 	if (typeof window.parent !== "undefined" && window.parent) {
@@ -86,7 +84,6 @@ const SettingsAppContent: React.FC<
 	const [systemConfigObj] = useIoBrokerObject("system.config");
 	// const systemConfig = systemConfigObj?.common;
 	const secret = systemConfigObj?.native?.secret || "Zgfr56gFe87jJOM";
-	console.log("secret", secret);
 
 	// Parse and decrypt settings when instance object is loaded or changed
 	const { namespace } = useGlobals();
@@ -102,7 +99,6 @@ const SettingsAppContent: React.FC<
 				props.encryptedFields ?? [],
 				secret,
 			);
-
 			// Transform loaded settings if desired
 			if (typeof props.afterLoad === "function") {
 				props.afterLoad(settings);
@@ -110,7 +106,7 @@ const SettingsAppContent: React.FC<
 
 			setSettings(settings);
 			setOriginalSettings({ ...settings });
-			console.log("settings", settings);
+
 			// Notify that the settings are loaded and the spinner can be hidden
 			props.onSettingsLoaded();
 		}
@@ -124,7 +120,6 @@ const SettingsAppContent: React.FC<
 		setChanged(
 			JSON.stringify(settings) !== JSON.stringify(originalSettings),
 		);
-		console.log("changed", changed);
 	}, [originalSettings, settings]);
 
 	// Detect errors
@@ -155,8 +150,6 @@ const SettingsAppContent: React.FC<
 				native: newNative,
 			};
 			await setInstanceObj(newInstanceObj);
-			console.log("Saved settings");
-			console.log(newInstanceObj);
 			// Updating the settings worked
 			setSettings(newNative);
 			setOriginalSettings(newNative);
@@ -166,7 +159,7 @@ const SettingsAppContent: React.FC<
 		}
 	};
 
-	const classes = useStyles();
+	// const classes = useStyles();
 	return (
 		<>
 			{!!settings && (
@@ -178,17 +171,43 @@ const SettingsAppContent: React.FC<
 						setError: setHasErrors,
 					}}
 				>
-					<div className={classes.root}>
-						<div className={classes.main}>{props.children}</div>
-						<div className={classes.buttons}>
-							<SaveCloseButtons
-								changed={changed}
-								hasErrors={hasErrors}
-								onSave={onSave}
-								onClose={closeSettingsWindow}
-							/>
-						</div>
-					</div>
+					{/*<div className={classes.root}>*/}
+					<Box
+						component="div"
+						sx={{
+							display: "flex",
+							flexFlow: "column nowrap",
+							height: "100%",
+						}}
+					>
+						{/*<div className={classes.main}>{props.children}</div>*/}
+						<Box
+							component="div"
+							sx={{
+								flex: "1 1 auto",
+								padding: (theme: Theme) => theme.spacing(2, 4),
+							}}
+						>
+							{props.children}
+
+							{/*<div className={classes.buttons}>*/}
+							<Box
+								component="div"
+								sx={{
+									flex: "0 0 auto",
+								}}
+							>
+								<SaveCloseButtons
+									changed={changed}
+									hasErrors={hasErrors}
+									onSave={onSave}
+									onClose={closeSettingsWindow}
+								/>
+							</Box>
+							{/*</div>*/}
+						</Box>
+						{/*</div>*/}
+					</Box>
 				</SettingsContext.Provider>
 			)}
 		</>
