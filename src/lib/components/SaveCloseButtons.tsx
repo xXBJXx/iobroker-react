@@ -1,27 +1,12 @@
 import CloseIcon from "@mui/icons-material/Close";
 import SaveIcon from "@mui/icons-material/Save";
+import { Box } from "@mui/material";
 import Button from "@mui/material/Button";
 import { Theme, useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import { makeStyles } from "@mui/styles";
 import React from "react";
 import { useI18n } from "../i18n";
 
-const useStyles = makeStyles((theme: Theme) => ({
-	// createStyles({
-	root: {
-		background: theme.saveToolbar.background,
-		display: "flex",
-		flexFlow: "row nowrap",
-		justifyItems: "space-between",
-		gap: theme.spacing(1),
-		padding: theme.spacing(1, 4),
-	},
-	button: {
-		fontWeight: "bold",
-	},
-	// }),
-}));
 export interface SaveCloseButtonsProps {
 	onSave: (close: boolean) => void;
 	onClose: () => void;
@@ -34,20 +19,32 @@ const SaveCloseButtons: React.FC<SaveCloseButtonsProps> = (props) => {
 	const { onSave, onClose, changed, hasErrors } = props;
 	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 	// @ts-ignore
-	const classes = useStyles();
+	// const classes = useStyles();
 	const { translate } = useI18n();
 	const theme = useTheme();
 	const textOnButtons = useMediaQuery(theme.breakpoints.up("md"));
 
 	return (
-		<div className={classes.root}>
+		<Box
+			component="div"
+			sx={{
+				display: "flex",
+				flexFlow: "row nowrap",
+				justifyItems: "space-between",
+				background: (theme: Theme) => theme.saveToolbar.background,
+				gap: (theme: Theme) => theme.spacing(1),
+				padding: (theme: Theme) => theme.spacing(1, 4),
+			}}
+		>
 			{textOnButtons ? (
 				<>
 					<Button
 						aria-label="Save"
 						variant="contained"
 						size="large"
-						className={classes.button}
+						sx={{
+							fontWeight: "bold",
+						}}
 						startIcon={<SaveIcon />}
 						onClick={() => onSave(false)}
 						disabled={!changed || !!hasErrors}
@@ -58,7 +55,9 @@ const SaveCloseButtons: React.FC<SaveCloseButtonsProps> = (props) => {
 						aria-label="Save and Close"
 						variant="contained"
 						size="large"
-						className={classes.button}
+						sx={{
+							fontWeight: "bold",
+						}}
 						startIcon={<SaveIcon />}
 						onClick={() => onSave(true)}
 						disabled={!changed || !!hasErrors}
@@ -69,7 +68,9 @@ const SaveCloseButtons: React.FC<SaveCloseButtonsProps> = (props) => {
 						aria-label="Close"
 						variant="contained"
 						size="large"
-						className={classes.button}
+						sx={{
+							fontWeight: "bold",
+						}}
 						startIcon={<CloseIcon />}
 						onClick={onClose}
 						style={{ marginLeft: "auto" }}
@@ -83,7 +84,9 @@ const SaveCloseButtons: React.FC<SaveCloseButtonsProps> = (props) => {
 						aria-label="Save"
 						variant="contained"
 						size="large"
-						className={classes.button}
+						sx={{
+							fontWeight: "bold",
+						}}
 						onClick={() => onSave(false)}
 						disabled={!changed || !!hasErrors}
 					>
@@ -93,7 +96,9 @@ const SaveCloseButtons: React.FC<SaveCloseButtonsProps> = (props) => {
 						aria-label="Save and Close"
 						variant="contained"
 						size="large"
-						className={classes.button}
+						sx={{
+							fontWeight: "bold",
+						}}
 						startIcon={<SaveIcon />}
 						endIcon={<CloseIcon />}
 						onClick={() => onSave(true)}
@@ -105,7 +110,9 @@ const SaveCloseButtons: React.FC<SaveCloseButtonsProps> = (props) => {
 						aria-label="Close"
 						variant="contained"
 						size="large"
-						className={classes.button}
+						sx={{
+							fontWeight: "bold",
+						}}
 						onClick={onClose}
 						style={{ marginLeft: "auto" }}
 					>
@@ -113,7 +120,7 @@ const SaveCloseButtons: React.FC<SaveCloseButtonsProps> = (props) => {
 					</Button>
 				</>
 			)}
-		</div>
+		</Box>
 	);
 };
 
