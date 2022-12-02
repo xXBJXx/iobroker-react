@@ -1,5 +1,5 @@
-import { Box } from "@mui/material";
 import type { Theme } from "@mui/material/styles";
+import { createStyles, makeStyles } from "@mui/styles";
 import React from "react";
 import SaveCloseButtons from "../components/SaveCloseButtons";
 import { useGlobals } from "../hooks/useGlobals";
@@ -42,6 +42,23 @@ function parseSettings(
 	}
 	return settings;
 }
+
+const useStyles = makeStyles((theme: Theme) =>
+	createStyles({
+		root: {
+			display: "flex",
+			flexFlow: "column nowrap",
+			height: "100%",
+		},
+		main: {
+			flex: "1 1 auto",
+			padding: theme.spacing(2, 4),
+		},
+		buttons: {
+			flex: "0 0 auto",
+		},
+	}),
+);
 
 const closeSettingsWindow = () => {
 	if (typeof window.parent !== "undefined" && window.parent) {
@@ -141,6 +158,7 @@ const SettingsAppContent: React.FC<
 		}
 	};
 
+	const classes = useStyles();
 	return (
 		<>
 			{!!settings && (
@@ -152,37 +170,17 @@ const SettingsAppContent: React.FC<
 						setError: setHasErrors,
 					}}
 				>
-					<Box
-						component="div"
-						sx={{
-							display: "flex",
-							flexFlow: "column nowrap",
-							height: "100%",
-						}}
-					>
-						<Box
-							component="div"
-							sx={{
-								flex: "1 1 auto",
-								padding: (theme: Theme) => theme.spacing(2, 4),
-							}}
-						>
-							{props.children}
-						</Box>
-						<Box
-							component="div"
-							sx={{
-								flex: "0 0 auto",
-							}}
-						>
+					<div className={classes.root}>
+						<div className={classes.main}>{props.children}</div>
+						<div className={classes.buttons}>
 							<SaveCloseButtons
 								changed={changed}
 								hasErrors={hasErrors}
 								onSave={onSave}
 								onClose={closeSettingsWindow}
 							/>
-						</Box>
-					</Box>
+						</div>
+					</div>
 				</SettingsContext.Provider>
 			)}
 		</>
