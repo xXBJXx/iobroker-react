@@ -17,9 +17,6 @@ export interface SaveCloseButtonsProps {
 
 const SaveCloseButtons: React.FC<SaveCloseButtonsProps> = (props) => {
 	const { onSave, onClose, changed, hasErrors } = props;
-	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-	// @ts-ignore
-	// const classes = useStyles();
 	const { translate } = useI18n();
 	const theme = useTheme();
 	const textOnButtons = useMediaQuery(theme.breakpoints.up("md"));

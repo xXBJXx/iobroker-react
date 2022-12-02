@@ -1,6 +1,5 @@
 import { Box } from "@mui/material";
 import type { Theme } from "@mui/material/styles";
-// import { createStyles, makeStyles } from "@mui/styles";
 import React from "react";
 import SaveCloseButtons from "../components/SaveCloseButtons";
 import { useGlobals } from "../hooks/useGlobals";
@@ -43,23 +42,6 @@ function parseSettings(
 	}
 	return settings;
 }
-
-// const useStyles = makeStyles((theme: Theme) =>
-// 	createStyles({
-// 		root: {
-// 			display: "flex",
-// 			flexFlow: "column nowrap",
-// 			height: "100%",
-// 		},
-// 		main: {
-// 			flex: "1 1 auto",
-// 			padding: theme.spacing(2, 4),
-// 		},
-// 		buttons: {
-// 			flex: "0 0 auto",
-// 		},
-// 	}),
-// );
 
 const closeSettingsWindow = () => {
 	if (typeof window.parent !== "undefined" && window.parent) {
@@ -159,7 +141,6 @@ const SettingsAppContent: React.FC<
 		}
 	};
 
-	// const classes = useStyles();
 	return (
 		<>
 			{!!settings && (
