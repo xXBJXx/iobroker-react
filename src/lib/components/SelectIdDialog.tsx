@@ -86,7 +86,6 @@ export const SelectIdDialog: React.FC<SelectIdDialogProps> = (props) => {
 
 	return (
 		<SelectIdRA
-			// @ts-expect-error Probably a problem in RA's typedefs
 			socket={connection}
 			imagePrefix="../.." // TODO: necessary?
 			title={props.title}
