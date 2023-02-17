@@ -40,7 +40,7 @@
     "prepare": "npm run build",
     "test": "echo \"Error: no test specified\" && exit 1",
     "docs": "docsify serve docs",
-    "debug": "esbuild --serve=localhost:8088 --servedir=www --outdir=www www/index.tsx --bundle --splitting --format=esm"
+    "debug": "esbuild --serve=localhost:8088 --servedir=www www/index.tsx --bundle --splitting --format=esm"
   },
   "dependencies": {
     "@iobroker/adapter-react-v5": "^4.0.13",
@@ -72,7 +72,7 @@
     "typescript": "^4.9.5"
   },
   "peerDependencies": {
-    "@mui/material": "^5.10.11",
+    "@mui/material": "^5.11.9",
     "react": "^17.0.2"
   },
   "bugs": {
