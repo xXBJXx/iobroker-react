@@ -40,39 +40,39 @@
     "prepare": "npm run build",
     "test": "echo \"Error: no test specified\" && exit 1",
     "docs": "docsify serve docs",
-    "debug": "esbuild --serve=localhost:8088 --servedir=www www/index.tsx --bundle --splitting --format=esm"
+    "debug": "esbuild --serve=localhost:8088 --servedir=www --outdir=www www/index.tsx --bundle --splitting --format=esm"
   },
   "dependencies": {
-    "@iobroker/adapter-react-v5": "^3.2.6",
+    "@iobroker/adapter-react-v5": "^4.0.13",
     "@iobroker/socket-client": "1.0.12"
   },
   "devDependencies": {
-    "@mui/material": "^5.10.11",
-    "@mui/styles": "^5.10.10",
-    "@tsconfig/recommended": "^1.0.1",
-    "@types/iobroker": "^4.0.1",
+    "@mui/material": "^5.11.9",
+    "@mui/styles": "^5.11.9",
+    "@tsconfig/recommended": "^1.0.2",
+    "@types/iobroker": "^4.0.5",
     "@types/lodash": "^4.14.191",
     "@types/react": "^17.0.43",
     "@types/react-dom": "^17.0.14",
-    "@typescript-eslint/eslint-plugin": "^5.41.0",
-    "@typescript-eslint/parser": "^5.41.0",
+    "@typescript-eslint/eslint-plugin": "^5.52.0",
+    "@typescript-eslint/parser": "^5.52.0",
     "alcalzone-shared": "^4.0.8",
     "clsx": "^1.2.1",
-    "esbuild": "^0.15.12",
-    "eslint": "^8.26.0",
-    "eslint-config-prettier": "^8.5.0",
+    "esbuild": "^0.17.8",
+    "eslint": "^8.34.0",
+    "eslint-config-prettier": "^8.6.0",
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-react-hooks": "^4.6.0",
     "lodash": "^4.17.21",
-    "prettier": "^2.7.1",
-    "prettier-plugin-organize-imports": "^3.1.1",
+    "prettier": "^2.8.4",
+    "prettier-plugin-organize-imports": "^3.2.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-error-boundary": "^3.1.4",
-    "typescript": "^4.8.4"
+    "typescript": "^4.9.5"
   },
   "peerDependencies": {
-    "@mui/material": "^5.10.11",
+    "@mui/material": "^5.11.9",
     "react": "^17.0.2"
   },
   "bugs": {
