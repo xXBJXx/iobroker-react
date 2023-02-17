@@ -13,5 +13,6 @@ export {
 	UseIoBrokerStateOptions,
 } from "./lib/hooks/useIoBrokerState";
 export { useIoBrokerTheme } from "./lib/hooks/useIoBrokerTheme";
+export { usePrevious } from "./lib/hooks/usePrevious";
 export { useWindowEvent } from "./lib/hooks/useWindowEvent";
 export { useI18n } from "./lib/i18n";
