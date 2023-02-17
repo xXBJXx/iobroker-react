@@ -30,6 +30,7 @@
     -   [useIoBrokerState](hooks/useIoBrokerState.md)
     -   [useIoBrokerTheme](hooks/useIoBrokerTheme.md)
     -   [useWindowEvent](hooks/useWindowEvent.md)
+    -   [useDeepCompareEffect](hooks/useDeepCompareEffect.md)
     -   [usePrevious](hooks/usePrevious.md)
     -   [useUpdateEffect](hooks/useUpdateEffect.md)
     -   [useTimeout](hooks/useTimeout.md)

@@ -2,6 +2,7 @@ export { useSettings } from "./lib/app/SettingsApp";
 export { useArray } from "./lib/hooks/usArray";
 export { useAdapter } from "./lib/hooks/useAdapter";
 export { ConnectionContext, useConnection } from "./lib/hooks/useConnection";
+export { useDeepCompareEffect } from "./lib/hooks/useDeepCompareEffect";
 export { useDebounce } from "./lib/hooks/useDebounce";
 export { useDialogs } from "./lib/hooks/useDialogs";
 export { useExpertMode } from "./lib/hooks/useExpertMode";
