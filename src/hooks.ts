@@ -15,6 +15,7 @@ export {
 	UseIoBrokerStateOptions,
 } from "./lib/hooks/useIoBrokerState";
 export { useIoBrokerTheme } from "./lib/hooks/useIoBrokerTheme";
+export { useUpdateEffect } from "./lib/hooks/useUpdateEffect";
 export { useLocalStorage, useSessionStorage } from "./lib/hooks/useStorage";
 export { useTimeout } from "./lib/hooks/useTimeout";
 export { useWindowEvent } from "./lib/hooks/useWindowEvent";
