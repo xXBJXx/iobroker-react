@@ -31,3 +31,4 @@
     -   [useIoBrokerTheme](hooks/useIoBrokerTheme.md)
     -   [useWindowEvent](hooks/useWindowEvent.md)
     -   [useArray](hooks/useArray.md)
+    -   [useStorage](hooks/useStorage.md)
