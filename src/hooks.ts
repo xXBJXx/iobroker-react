@@ -7,6 +7,7 @@ export { useDeepCompareEffect } from "./lib/hooks/useDeepCompareEffect";
 export { useDebounce } from "./lib/hooks/useDebounce";
 export { useDialogs } from "./lib/hooks/useDialogs";
 export { useExpertMode } from "./lib/hooks/useExpertMode";
+export { useGeolocation } from "./lib/hooks/useGeolocation";
 export { GlobalsContext, useGlobals } from "./lib/hooks/useGlobals";
 export {
 	useIoBrokerObject,

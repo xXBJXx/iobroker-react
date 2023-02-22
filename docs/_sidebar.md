@@ -28,6 +28,7 @@
     -   [useIoBrokerState](hooks/useIoBrokerState.md)
     -   [useIoBrokerTheme](hooks/useIoBrokerTheme.md)
     -   [useWindowEvent](hooks/useWindowEvent.md)
+    -   [useGeolocation](hooks/useGeolocation.md)
     -   [useCookie](hooks/useCookie.md)
     -   [useDeepCompareEffect](hooks/useDeepCompareEffect.md)
     -   [usePrevious](hooks/usePrevious.md)
