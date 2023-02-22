@@ -3,6 +3,7 @@ export { useAdapter } from "./lib/hooks/useAdapter";
 export { ConnectionContext, useConnection } from "./lib/hooks/useConnection";
 export { useDialogs } from "./lib/hooks/useDialogs";
 export { useExpertMode } from "./lib/hooks/useExpertMode";
+export { useGeolocation } from "./lib/hooks/useGeolocation";
 export { GlobalsContext, useGlobals } from "./lib/hooks/useGlobals";
 export {
 	useIoBrokerObject,
