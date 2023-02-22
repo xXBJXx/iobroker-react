@@ -43,24 +43,24 @@
     "debug": "esbuild --serve=localhost:8088 --servedir=www --outdir=www www/index.tsx --bundle --splitting --format=esm"
   },
   "dependencies": {
-    "js-cookie": "^3.0.1"
     "@iobroker/adapter-react-v5": "^4.0.13",
-    "@iobroker/socket-client": "1.0.12"
+    "@iobroker/socket-client": "1.0.12",
+    "js-cookie": "^3.0.1"
   },
   "devDependencies": {
     "@types/js-cookie": "^3.0.3",
-    "@mui/material": "^5.11.9",
+    "@mui/material": "^5.11.10",
     "@mui/styles": "^5.11.9",
     "@tsconfig/recommended": "^1.0.2",
     "@types/iobroker": "^4.0.5",
     "@types/lodash": "^4.14.191",
     "@types/react": "^17.0.43",
     "@types/react-dom": "^17.0.14",
-    "@typescript-eslint/eslint-plugin": "^5.52.0",
-    "@typescript-eslint/parser": "^5.52.0",
+    "@typescript-eslint/eslint-plugin": "^5.53.0",
+    "@typescript-eslint/parser": "^5.53.0",
     "alcalzone-shared": "^4.0.8",
     "clsx": "^1.2.1",
-    "esbuild": "^0.17.8",
+    "esbuild": "^0.17.10",
     "eslint": "^8.34.0",
     "eslint-config-prettier": "^8.6.0",
     "eslint-plugin-prettier": "^4.2.1",
