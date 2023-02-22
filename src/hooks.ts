@@ -1,6 +1,7 @@
 export { useSettings } from "./lib/app/SettingsApp";
 export { useAdapter } from "./lib/hooks/useAdapter";
 export { ConnectionContext, useConnection } from "./lib/hooks/useConnection";
+export { useCookie } from "./lib/hooks/useCookie";
 export { useDialogs } from "./lib/hooks/useDialogs";
 export { useExpertMode } from "./lib/hooks/useExpertMode";
 export { GlobalsContext, useGlobals } from "./lib/hooks/useGlobals";
