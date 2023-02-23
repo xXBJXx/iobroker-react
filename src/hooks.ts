@@ -1,5 +1,6 @@
 export { useSettings } from "./lib/app/SettingsApp";
 export { useAdapter } from "./lib/hooks/useAdapter";
+export { useAsync } from "./lib/hooks/useAsync";
 export { ConnectionContext, useConnection } from "./lib/hooks/useConnection";
 export { useDialogs } from "./lib/hooks/useDialogs";
 export { useExpertMode } from "./lib/hooks/useExpertMode";

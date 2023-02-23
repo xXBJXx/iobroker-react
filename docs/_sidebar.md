@@ -28,3 +28,4 @@
     -   [useIoBrokerState](hooks/useIoBrokerState.md)
     -   [useIoBrokerTheme](hooks/useIoBrokerTheme.md)
     -   [useWindowEvent](hooks/useWindowEvent.md)
+    -   [useAsync](hooks/useAsync.md)
