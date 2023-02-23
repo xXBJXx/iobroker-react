@@ -4,6 +4,7 @@ export { ConnectionContext, useConnection } from "./lib/hooks/useConnection";
 export { useDialogs } from "./lib/hooks/useDialogs";
 export { useExpertMode } from "./lib/hooks/useExpertMode";
 export { GlobalsContext, useGlobals } from "./lib/hooks/useGlobals";
+export { useHover } from "./lib/hooks/useHover"; // need the new version of useHover
 export {
 	useIoBrokerObject,
 	UseIoBrokerObjectOptions,
