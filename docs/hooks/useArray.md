@@ -12,24 +12,24 @@ It returns an object with the following properties:
 interface ArrayContextData<T> {
 	array: T[]; // The array itself
 	clear(): void; // Clears the array
-	filter(callbackfn: (value: T, index: number, array: T[]) => unknown, thisArg?: any): void; // Filters the array
-	find(predicate: (value: T, index: number, obj: T[]) => unknown, thisArg?: any): T | undefined; // Finds an item in the array
-	findIndex(predicate: (value: T) => boolean): number; // Finds the index of an item in the array
+	filter(predicate: (value: any) => unknown): void; // Filters the array
+	find(predicate: (value: any) => boolean): any; // Finds an item in the array
+	findIndex(predicate: (value: T) => unknown): number; // Finds the index of an item in the array
 	insert(index: number, item: T): void; // Inserts an item at the specified index
 	move(from: number, to: number): void; // Moves an item from one index to another
 	pop(): T | undefined; // Removes the last item from the array
-	push(...items: T[]): number; // Adds one or more items to the end of the array
+	push(item: T): void; // Adds an item to the end of the array
 	remove(index: number): void; // Removes an item at the specified index
-	set(index: number, item: T): void; // Sets an item at the specified index
+	set(items: T[]): void; // Sets the array to the specified items
 	shift(): T | undefined; // Removes the first item from the array
 	sort(compareFn?: (a: T, b: T) => number): void; // Sorts the array
 	swap(indexA: number, indexB: number): void; // Swaps two items in the array
-	unshift(...items: T[]): number; // Adds one or more items to the beginning of the array
+	unshift(item: T): number; // Adds an item to the beginning of the array
 	update(index: number, item: T): void; // Updates an item at the specified index
 }
 ```
-
-## Example
+ 
+## Example Single State
 
 ```tsx
 import { Button } from "@mui/material";
@@ -38,31 +38,82 @@ import {useArray} from 'iobroker-react/hooks';
 
 
 const ExampleComponent: React.FC = () => {
-	const {array, push, pop, shift, unshift, insert, remove, update, set, clear, swap, move, filter, find, findIndex, sort} = useArray(['a', 'b', 'c']);
+	const { array, push, remove, update, set, clear } = useArray([
+		"a",
+		"b",
+		"c",
+	]);
 
 	return (
 		<div>
-			<Button onClick={() => push('d')}>Push</Button>
-			<Button onClick={() => pop()}>Pop</Button>
-			<Button onClick={() => shift()}>Shift</Button>
-			<Button onClick={() => unshift('d')}>Unshift</Button>
-			<Button onClick={() => insert(1, 'd')}>Insert</Button>
+			<Button onClick={() => push("d")}>Push</Button>
 			<Button onClick={() => remove(1)}>Remove</Button>
-			<Button onClick={() => update(1, 'd')}>Update</Button>
-			<Button onClick={() => set(1, 'd')}>Set</Button>
+			<Button onClick={() => update(1, "d")}>Update</Button>
+			<Button onClick={() => set(["d", "e", "f"])}>Set</Button>
 			<Button onClick={() => clear()}>Clear</Button>
-			<Button onClick={() => swap(1, 2)}>Swap</Button>
-			<Button onClick={() => move(1, 2)}>Move</Button>
-			<Button onClick={() => filter((item) => item !== 'b')}>Filter</Button>
-			<Button onClick={() => find((item) => item === 'b')}>Find</Button>
-			<Button onClick={() => findIndex((item) => item === 'b')}>FindIndex</Button>
-			<Button onClick={() => sort((a, b) => a.localeCompare(b))}>Sort</Button>
-			<ul>
+			<Typography component={"ul"}>
 				{array.map((item, index) => (
-					<li key={index}>{item}</li>
+					<Typography component={"li"} key={index}>
+						{item}
+					</Typography>
 				))}
-			</ul>
+			</Typography>
 		</div>
 	);
 };
 ```
+
+## Example Multiple States
+
+```tsx
+import { Button } from "@mui/material";
+import React from 'react';
+import {useArray} from 'iobroker-react/hooks';
+
+
+const ExampleComponent: React.FC = () => {
+	const { array: array1, push: push1, remove: remove1, update: update1, set: set1, clear: clear1 } = useArray([
+		"a",
+		"b",
+		"c",
+	]);
+	const { array: array2, push: push2, remove: remove2, update: update2, set: set2, clear: clear2 } = useArray([
+		"f",
+		"w",
+		"r",
+	]);
+
+	return (
+		<div>
+			<Button onClick={() => push1("d")}>Push 1</Button>
+			<Button onClick={() => remove1(1)}>Remove 1</Button>
+			<Button onClick={() => update1(1, "d")}>Update 1</Button>
+			<Button onClick={() => set1(["d", "e", "f"])}>Set 1</Button>
+			<Button onClick={() => clear1()}>Clear 1</Button>
+			<Typography component={"ul"}>
+				{array1.map((item, index) => (
+					<Typography component={"li"} key={index}>
+						{item}
+					</Typography>
+				))}
+			</Typography>
+			<Button onClick={() => push2("d")}>Push 2</Button>
+			<Button onClick={() => remove2(1)}>Remove 2</Button>
+			<Button onClick={() => update2(1, "d")}>Update 2</Button>
+			<Button onClick={() => set2(["e", "r", "w"])}>Set 2</Button>
+			<Button onClick={() => clear2()}>Clear 2</Button>
+			<Typography component={"ul"}>
+				{array2.map((item, index) => (
+					<Typography component={"li"} key={index}>
+						{item}
+					</Typography>
+				))}
+			</Typography>
+		</div>
+	);
+};
+```
+
+
+
+

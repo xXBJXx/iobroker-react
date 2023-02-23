@@ -1,110 +1,145 @@
 import React from "react";
 
 /**
+ * @example Single State
  * import { Button } from "@mui/material";
  * import React from 'react';
  * import {useArray} from 'iobroker-react/hooks';
  *
  *
  * const ExampleComponent: React.FC = () => {
- * 	const {array, push, pop, shift, unshift, insert, remove, update, set, clear, swap, move, filter, find, findIndex, sort} = useArray(['a', 'b', 'c']);
+ * 	const { array, push, remove, update, set, clear } = useArray([
+ * 		"a",
+ * 		"b",
+ * 		"c",
+ * 	]);
  *
  * 	return (
  * 		<div>
- * 			<Button onClick={() => push('d')}>Push</Button>
- * 			<Button onClick={() => pop()}>Pop</Button>
- * 			<Button onClick={() => shift()}>Shift</Button>
- * 			<Button onClick={() => unshift('d')}>Unshift</Button>
- * 			<Button onClick={() => insert(1, 'd')}>Insert</Button>
+ * 			<Button onClick={() => push("d")}>Push</Button>
  * 			<Button onClick={() => remove(1)}>Remove</Button>
- * 			<Button onClick={() => update(1, 'd')}>Update</Button>
- * 			<Button onClick={() => set(1, 'd')}>Set</Button>
+ * 			<Button onClick={() => update(1, "d")}>Update</Button>
+ * 			<Button onClick={() => set(["d", "e", "f"])}>Set</Button>
  * 			<Button onClick={() => clear()}>Clear</Button>
- * 			<Button onClick={() => swap(1, 2)}>Swap</Button>
- * 			<Button onClick={() => move(1, 2)}>Move</Button>
- * 			<Button onClick={() => filter((item) => item !== 'b')}>Filter</Button>
- * 			<Button onClick={() => find((item) => item === 'b')}>Find</Button>
- * 			<Button onClick={() => findIndex((item) => item === 'b')}>FindIndex</Button>
- * 			<Button onClick={() => sort((a, b) => a.localeCompare(b))}>Sort</Button>
- * 			<ul>
+ * 			<Typography component={"ul"}>
  * 				{array.map((item, index) => (
- * 					<li key={index}>{item}</li>
+ * 					<Typography component={"li"} key={index}>
+ * 						{item}
+ * 					</Typography>
  * 				))}
- * 			</ul>
+ * 			</Typography>
  * 		</div>
  * 	);
  * };
+ *
+ * @example Multiple States
+ * import { Button } from "@mui/material";
+ * import React from 'react';
+ * import {useArray} from 'iobroker-react/hooks';
+ *
+ * const ExampleComponent: React.FC = () => {
+ * 	const {
+ * 		array: myArray1,
+ * 		push: myArrayPush1,
+ * 		remove: myArrayRemove1,
+ * 		update: myArrayUpdate1,
+ * 		set: myArraySet1,
+ * 		clear: myArrayClear1,
+ * 	} = useArray(["a", "b", "c"]);
+ *
+ * 	const {
+ * 		array: myArray2,
+ * 		push: myArrayPush2,
+ * 		remove: myArrayRemove2,
+ * 		update: myArrayUpdate2,
+ * 		set: myArraySet2,
+ * 		clear: myArrayClear2,
+ * 	} = useArray(["5", "3", "4"]);
+ *
+ * 	return (
+ * 		<>
+ * 			<Button onClick={() => myArrayPush1("d")}>Push</Button>
+ * 			<Button onClick={() => myArrayRemove1(1)}>Remove</Button>
+ * 			<Button onClick={() => myArrayUpdate1(1, "d")}>Update</Button>
+ * 			<Button onClick={() => myArraySet1(["d", "e", "f"])}>Set</Button>
+ * 			<Button onClick={() => myArrayClear1()}>Clear</Button>
+ * 			<Typography component={"ul"}>
+ * 				{myArray1.map((item, index) => (
+ * 					<Typography component={"li"} key={index}>
+ * 						{item}
+ * 					</Typography>
+ * 				))}
+ * 			</Typography>
+ *
+ * 			<br />
+ *
+ * 			<Button onClick={() => myArrayPush2("1")}>my Push</Button>
+ * 			<Button onClick={() => myArrayRemove2(1)}>my Remove</Button>
+ * 			<Button onClick={() => myArrayUpdate2(1, "1")}>my Update</Button>
+ * 			<Button onClick={() => myArraySet2(["1", "2", "3"])}>my Set</Button>
+ * 			<Button onClick={() => myArrayClear2()}>my Clear</Button>
+ * 			<Typography component={"ul"}>
+ * 				{myArray2.map((item, index) => (
+ * 					<Typography component={"li"} key={index}>
+ * 						{item}
+ * 					</Typography>
+ * 				))}
+ * 			</Typography>
+ * 		</>
+ * 	);
+ * 	}
  */
 
 interface ArrayHookReturn {
 	array: any[];
-	set: (value: any[]) => void;
-	push: (element: any) => void;
-	filter: (callback: (value: any) => void) => void;
-	update: (index: number, newElement: any) => void;
-	insert: (index: number, newElement: any) => void;
-	remove: (index: number) => void;
 	clear: () => void;
+	filter: (predicate: (value: any) => unknown) => void;
+	find: (predicate: (value: any) => boolean) => any;
+	findIndex: (predicate: (value: any) => unknown) => number;
+	insert: (index: number, item: any) => void;
 	move: (from: number, to: number) => void;
+	pop: () => void | undefined;
+	push: (item: any) => void;
+	remove: (index: number) => void;
+	set: (items: any[]) => void;
+	shift: () => void | undefined;
+	sort: (compareFn: (a: any, b: any) => number) => void;
 	swap: (indexA: number, indexB: number) => void;
-	sort: (compareFunction: (a: any, b: any) => number) => void;
-	findIndex: (callback: (value: any) => void) => number;
-	pop: () => void;
-	shift: () => void;
-	unshift: (element: any) => void;
-	find: (callback: (value: any) => void) => any;
+	unshift: (item: any) => void;
+	update: (index: number, item: any) => void;
 }
 
-export const useArray = (defaultValue: any): ArrayHookReturn => {
-	const [array, setArray] = React.useState(defaultValue);
+export const useArray = (defaultValue: any[]): ArrayHookReturn => {
+	const [array, setArray] = React.useState<any[]>(defaultValue);
 
-	function push(element: any): void {
-		setArray((a: any) => [...a, element]);
+	function clear(): void {
+		setArray([]);
 	}
 
-	function filter(callback: (a: any) => void): void {
-		setArray((a: any[]) => {
-			return a.filter(callback);
+	function filter(predicate: (value: any) => unknown): void {
+		setArray((a) => {
+			return a.filter(predicate);
 		});
 	}
 
-	const update = (index: number, newElement: any): void => {
-		setArray((a: any[]) => [
-			...a.slice(0, index),
-			newElement,
-			...a.slice(index + 1, a.length),
-		]);
+	const find = (predicate: (value: any) => boolean): any => {
+		return array.find(predicate);
 	};
 
-	const insert = (index: number, newElement: any): void => {
-		setArray((a: any[]) => [
+	const findIndex = (predicate: (value: any) => unknown): number => {
+		return array.findIndex(predicate);
+	};
+
+	const insert = (index: number, item: any): void => {
+		setArray((a) => [
 			...a.slice(0, index),
-			newElement,
+			item,
 			...a.slice(index, a.length),
 		]);
 	};
 
-	const pop = (): void => {
-		setArray((a: any[]) => [...a.slice(0, a.length - 1)]);
-	};
-
-	function remove(index: number): void {
-		setArray((a: any[]) => [
-			...a.slice(0, index),
-			...a.slice(index + 1, a.length),
-		]);
-	}
-
-	const shift = (): void => {
-		setArray((a: any[]) => [...a.slice(1, a.length)]);
-	};
-
-	const unshift = (element: any): void => {
-		setArray((a: any[]) => [element, ...a]);
-	};
-
 	const move = (from: number, to: number): void => {
-		setArray((a: any[]) => {
+		setArray((a) => {
 			const element = a[from];
 			const newArray = [...a];
 			newArray.splice(from, 1);
@@ -112,8 +147,32 @@ export const useArray = (defaultValue: any): ArrayHookReturn => {
 			return newArray;
 		});
 	};
+
+	const pop = (): void => {
+		setArray((a) => [...a.slice(0, a.length - 1)]);
+	};
+
+	function push(item: any): void {
+		setArray((a) => [...a, item]);
+	}
+
+	function remove(index: number): void {
+		setArray((a) => [
+			...a.slice(0, index),
+			...a.slice(index + 1, a.length),
+		]);
+	}
+
+	const shift = (): void => {
+		setArray((a) => [...a.slice(1, a.length)]);
+	};
+
+	const sort = (compareFn: (a: any, b: any) => number): void => {
+		setArray((a) => [...a].sort(compareFn));
+	};
+
 	const swap = (indexA: number, indexB: number): void => {
-		setArray((a: any[]) => {
+		setArray((a) => {
 			const newArray = [...a];
 			const temp = newArray[indexA];
 			newArray[indexA] = newArray[indexB];
@@ -122,21 +181,17 @@ export const useArray = (defaultValue: any): ArrayHookReturn => {
 		});
 	};
 
-	const sort = (compareFunction: (a: any, b: any) => number): void => {
-		setArray((a: any[]) => [...a].sort(compareFunction));
+	const unshift = (item: any): void => {
+		setArray((a) => [item, ...a]);
 	};
 
-	const findIndex = (callback: (a: any) => void): number => {
-		return array.findIndex(callback);
+	const update = (index: number, item: any): void => {
+		setArray((a) => [
+			...a.slice(0, index),
+			item,
+			...a.slice(index + 1, a.length),
+		]);
 	};
-
-	const find = (callback: (a: any) => void): any => {
-		return array.find(callback);
-	};
-
-	function clear(): void {
-		setArray([]);
-	}
 
 	return {
 		array,
