@@ -20,13 +20,34 @@ import React from "react";
  * };
  * ```
  */
-export function useWindowEvent<K extends keyof WindowEventMap>(
-	type: K,
-	listener: (this: Window, ev: WindowEventMap[K]) => any,
+
+export const useWindowEvent = <W extends keyof WindowEventMap>(
+	type: W,
+	listener: (this: Window, ev: WindowEventMap[W]) => any,
+	element?: Window | HTMLElement | null,
 	options?: boolean | AddEventListenerOptions,
-): void {
+): void => {
+	element = element || window;
+	const listenerRef: React.MutableRefObject<
+		| EventListener
+		| ((this: Window, ev: WindowEventMap[W]) => any)
+		| EventListenerObject
+	> = React.useRef(listener);
+
 	React.useEffect(() => {
-		window.addEventListener(type, listener, options);
-		return () => window.removeEventListener(type, listener, options);
-	}, [listener, options, type]);
-}
+		listenerRef.current = listener;
+	}, [listener]);
+
+	React.useEffect(() => {
+		if (element == null) return;
+		const handler = (e: Event): any => {
+			if (typeof listenerRef.current === "function") {
+				// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+				// @ts-ignore
+				listenerRef.current(e);
+			}
+		};
+		element.addEventListener(type, handler, options);
+		return () => element?.removeEventListener(type, handler, options);
+	}, [type, element, options]);
+};
