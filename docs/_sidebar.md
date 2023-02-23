@@ -28,6 +28,7 @@
     -   [useIoBrokerState](hooks/useIoBrokerState.md)
     -   [useIoBrokerTheme](hooks/useIoBrokerTheme.md)
     -   [useWindowEvent](hooks/useWindowEvent.md)
+    -   [useHover](hooks/useHover.md)
     -   [useAsync](hooks/useAsync.md)
     -   [useGeolocation](hooks/useGeolocation.md)
     -   [useCookie](hooks/useCookie.md)
