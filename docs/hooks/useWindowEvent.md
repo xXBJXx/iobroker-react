@@ -7,6 +7,17 @@ This would normally be done by using the `window.addEventListener` and `window.r
 import { useWindowEvent } from "iobroker-react/hooks";
 ```
 
+## Usage
+
+```ts
+function useWindowEvent(
+  	event: string, // The event to subscribe to (e.g. "message")
+	callback: (event: Event) => void, // The callback to call when the event is triggered
+    element?: Window | HTMLElement | null, // The element to subscribe to. Defaults to window.
+	options?: WindowEventOptions | boolean // The options to pass to the event listener. Defaults to false.
+): () => void;
+```
+
 The hook takes the same arguments as the `window.addEventListener` function.
 
 ## Example
