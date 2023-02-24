@@ -90,55 +90,54 @@ import React from "react";
  * 	}
  */
 
-interface ArrayHookReturn {
-	array: any[];
-	clear: () => any[];
-	filter: (predicate: (value: any) => unknown) => any[];
-	find: (predicate: (value: any) => boolean) => any[];
-	findIndex: (predicate: (value: any) => unknown) => number;
-	insert: (index: number, item: any) => any[];
-	move: (from: number, to: number) => any[];
-	pop: () => any[];
-	push: (item: any) => any[];
-	remove: (index: number) => any[];
-	set: (items: any[]) => void;
-	shift: () => any[];
-	sort: (compareFn: (a: any, b: any) => number) => any[];
-	swap: (indexA: number, indexB: number) => any[];
-	unshift: (item: any) => any[];
-	update: (index: number, item: any) => any[];
+interface ArrayHookReturn<T> {
+	array: T[];
+	clear: () => void;
+	filter: (predicate: (value: T) => boolean) => T[];
+	find: (predicate: (value: T) => boolean) => T | undefined;
+	findIndex: (predicate: (value: T) => unknown) => number;
+	insert: (index: number, item: T) => T[];
+	move: (from: number, to: number) => T[];
+	pop: () => T[];
+	push: (item: T) => T[];
+	remove: (index: number) => T[];
+	set: (items: T[]) => void;
+	shift: () => T[];
+	sort: (compareFn: (a: T, b: T) => number) => T[];
+	swap: (indexA: number, indexB: number) => T[];
+	unshift: (item: T) => T[];
+	update: (index: number, item: T) => T[];
 }
 
-export const useArray = (defaultValue: any[]): ArrayHookReturn => {
-	const [array, setArray] = React.useState<any[]>(defaultValue);
+export const useArray = <T>(defaultValue: T[]): ArrayHookReturn<T> => {
+	const [array, setArray] = React.useState<T[]>(defaultValue);
 
-	function clear(): any[] {
+	function clear(): void {
 		setArray([]);
-		return [];
 	}
 
-	function filter(predicate: (value: any) => unknown): any[] {
+	function filter(predicate: (value: T) => boolean): T[] {
 		const newArray = array.filter(predicate);
 		setArray(newArray);
 		return newArray;
 	}
 
-	const find = (predicate: (value: any) => boolean): any => {
+	const find = (predicate: (value: T) => boolean): T | undefined => {
 		return array.find(predicate);
 	};
 
-	const findIndex = (predicate: (value: any) => unknown): number => {
+	const findIndex = (predicate: (value: T) => unknown): number => {
 		return array.findIndex(predicate);
 	};
 
-	const insert = (index: number, item: any): any[] => {
+	const insert = (index: number, item: T): T[] => {
 		const newArray = [...array];
 		newArray.splice(index, 0, item);
 		setArray(newArray);
 		return newArray;
 	};
 
-	const move = (from: number, to: number): any[] => {
+	const move = (from: number, to: number): T[] => {
 		const newArray = [...array];
 		const element = newArray[from];
 		newArray.splice(from, 1);
@@ -147,41 +146,41 @@ export const useArray = (defaultValue: any[]): ArrayHookReturn => {
 		return newArray;
 	};
 
-	const pop = (): any[] => {
+	const pop = (): T[] => {
 		const newArray = [...array];
 		newArray.pop();
 		setArray(newArray);
 		return newArray;
 	};
 
-	function push(item: any): any[] {
+	function push(item: T): T[] {
 		const newArray = [...array, item];
 		setArray((a) => [...a, item]);
 		return newArray;
 	}
 
-	function remove(index: number): any[] {
+	function remove(index: number): T[] {
 		const newArray = [...array];
 		newArray.splice(index, 1);
 		setArray(newArray);
 		return newArray;
 	}
 
-	const shift = (): any[] => {
+	const shift = (): T[] => {
 		const newArray = [...array];
 		newArray.shift();
 		setArray(newArray);
 		return newArray;
 	};
 
-	const sort = (compareFn: (a: any, b: any) => number): any[] => {
+	const sort = (compareFn: (a: T, b: T) => number): T[] => {
 		const newArray = [...array];
 		newArray.sort(compareFn);
 		setArray(newArray);
 		return newArray;
 	};
 
-	const swap = (indexA: number, indexB: number): any[] => {
+	const swap = (indexA: number, indexB: number): T[] => {
 		const newArray = [...array];
 		const temp = newArray[indexA];
 		newArray[indexA] = newArray[indexB];
@@ -190,13 +189,13 @@ export const useArray = (defaultValue: any[]): ArrayHookReturn => {
 		return newArray;
 	};
 
-	const unshift = (item: any): any[] => {
+	const unshift = (item: T): T[] => {
 		const newArray = [item, ...array];
 		setArray(newArray);
 		return newArray;
 	};
 
-	const update = (index: number, item: any): any[] => {
+	const update = (index: number, item: T): T[] => {
 		const newArray = [...array];
 		newArray[index] = item;
 		setArray(newArray);
