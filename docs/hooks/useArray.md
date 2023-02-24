@@ -11,24 +11,25 @@ It returns an object with the following properties:
 ```ts
 interface ArrayContextData<T> {
 	array: T[]; // The array itself
-	clear(): void; // Clears the array
-	filter(predicate: (value: any) => unknown): void; // Filters the array
-	find(predicate: (value: any) => boolean): any; // Finds an item in the array
-	findIndex(predicate: (value: T) => unknown): number; // Finds the index of an item in the array
-	insert(index: number, item: T): void; // Inserts an item at the specified index
-	move(from: number, to: number): void; // Moves an item from one index to another
-	pop(): T | undefined; // Removes the last item from the array
-	push(item: T): void; // Adds an item to the end of the array
-	remove(index: number): void; // Removes an item at the specified index
-	set(items: T[]): void; // Sets the array to the specified items
-	shift(): T | undefined; // Removes the first item from the array
-	sort(compareFn?: (a: T, b: T) => number): void; // Sorts the array
-	swap(indexA: number, indexB: number): void; // Swaps two items in the array
-	unshift(item: T): number; // Adds an item to the beginning of the array
-	update(index: number, item: T): void; // Updates an item at the specified index
+	clear(): T[]; // Clears the array (sets it to an empty array) and returns the new array
+	filter(predicate: (value: any) => unknown): T[]; // Filters the array and returns a new array
+	find(predicate: (value: any) => boolean): T; // Finds an item in the array and returns it
+	findIndex(predicate: (value: T) => unknown): number; // Finds the index of an item in the array and returns it
+	insert(index: number, item: T): T[]; // Inserts an item at the specified index in the array
+	move(from: number, to: number): T[]; // Moves an item from one index to another index in the array and returns the new array
+	pop(): T[] | undefined; // Removes the last item from the array and returns the new array
+	push(item: T): T[]; // Adds an item to the end of the array and returns the new array
+	remove(index: number): T[]; // Removes an item at the specified index in the array and returns the new array
+	set(items: T[]): void; // Sets the array to the specified items and returns the new array
+	shift(): T | undefined; // Removes the first item from the array and returns the new array
+	sort(compareFn?: (a: T, b: T) => number): T[]; // Sorts the array and returns the new array
+	swap(indexA: number, indexB: number): T[]; // Swaps two items in the array and returns the new array
+	unshift(item: T): T[]; // Adds an item to the beginning of the array and returns the new array
+	update(index: number, item: T): T[]; // Updates an item at the specified index in the array and returns the new array
 }
 ```
- 
+### All functions that modify the array return the new array in addition to the normal array modification. The new array can then be stored in a variable, for example, to be further processed in the function in which it was executed.
+
 ## Example Single State
 
 ```tsx
@@ -43,7 +44,7 @@ const ExampleComponent: React.FC = () => {
 		"b",
 		"c",
 	]);
-
+  
 	return (
 		<div>
 			<Button onClick={() => push("d")}>Push</Button>
@@ -62,6 +63,44 @@ const ExampleComponent: React.FC = () => {
 	);
 };
 ```
+
+## Example Single State with return value
+
+```tsx
+import { Button } from "@mui/material";
+import React from 'react';
+import {useArray} from 'iobroker-react/hooks';
+
+
+const ExampleComponent: React.FC = () => {
+	const { array, push, remove, update, set, clear } = useArray([
+		"a",
+		"b",
+		"c",
+	]);
+
+	const handleRemove = () => {
+		const newArray = remove(2);
+		console.log(newArray); // ["a", "b"]
+    // do something with the new array
+	};
+  
+	return (
+		<div>
+			<Button onClick={handleRemove}>Remove</Button>
+			<Button onClick={() => set(["a", "b", "c","d","e"])}>Set</Button>
+			<Typography component={"ul"}>
+				{array.map((item, index) => (
+					<Typography component={"li"} key={index}>
+						{item}
+					</Typography>
+				))}
+			</Typography>
+		</div>
+	);
+};
+```
+
 
 ## Example Multiple States
 
