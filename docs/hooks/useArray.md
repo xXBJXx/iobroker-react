@@ -11,9 +11,9 @@ It returns an object with the following properties:
 ```ts
 interface ArrayContextData<T> {
 	array: T[]; // The array itself
-	clear(): T[]; // Clears the array (sets it to an empty array) and returns the new array
-	filter(predicate: (value: any) => unknown): T[]; // Filters the array and returns a new array
-	find(predicate: (value: any) => boolean): T; // Finds an item in the array and returns it
+	clear(): void; // Clears the array (sets it to an empty array)
+	filter(predicate: (value: T) => unknown): T[]; // Filters the array and returns a new array
+	find(predicate: (value: T) => boolean): T| undefined; // Finds an item in the array and returns it
 	findIndex(predicate: (value: T) => unknown): number; // Finds the index of an item in the array and returns it
 	insert(index: number, item: T): T[]; // Inserts an item at the specified index in the array
 	move(from: number, to: number): T[]; // Moves an item from one index to another index in the array and returns the new array
