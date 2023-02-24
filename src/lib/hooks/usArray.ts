@@ -102,7 +102,7 @@ interface ArrayHookReturn<T> {
 	push: (item: T) => T[];
 	remove: (index: number) => T[];
 	set: (items: T[]) => void;
-	shift: () => T[];
+	shift: () => T[] | undefined;
 	sort: (compareFn: (a: T, b: T) => number) => T[];
 	swap: (indexA: number, indexB: number) => T[];
 	unshift: (item: T) => T[];
@@ -166,7 +166,7 @@ export const useArray = <T>(defaultValue: T[]): ArrayHookReturn<T> => {
 		return newArray;
 	}
 
-	const shift = (): T[] => {
+	const shift = (): T[] | undefined => {
 		const newArray = [...array];
 		newArray.shift();
 		setArray(newArray);
