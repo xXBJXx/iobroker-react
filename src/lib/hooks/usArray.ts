@@ -98,7 +98,7 @@ interface ArrayHookReturn<T> {
 	findIndex: (predicate: (value: T) => unknown) => number;
 	insert: (index: number, item: T) => T[];
 	move: (from: number, to: number) => T[];
-	pop: () => T[];
+	pop: () => T[] | undefined;
 	push: (item: T) => T[];
 	remove: (index: number) => T[];
 	set: (items: T[]) => void;
@@ -146,7 +146,7 @@ export const useArray = <T>(defaultValue: T[]): ArrayHookReturn<T> => {
 		return newArray;
 	};
 
-	const pop = (): T[] => {
+	const pop = (): T[] | undefined => {
 		const newArray = [...array];
 		newArray.pop();
 		setArray(newArray);
