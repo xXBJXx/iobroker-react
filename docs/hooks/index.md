@@ -27,6 +27,10 @@ The `useExpertMode` hook returns a `boolean` that can be used to determine wheth
 The `useGlobals` hook is used to access some global constants identifying the current adapter.  
 → [Documentation](hooks/useGlobals.md)
 
+## `useHover` hook
+The `useHover` hook can be used to determine whether the mouse is currently hovering over a component.  
+→ [Documentation](hooks/useHover.md)
+
 ## `useI18n` hook
 
 The `useI18n` hook is used to provide internationalization support to your UI.  
