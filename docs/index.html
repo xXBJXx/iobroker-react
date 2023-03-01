@@ -14,7 +14,10 @@
 			name="viewport"
 			content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
 		/>
-		<link rel="stylesheet" href="//unpkg.com/docsify/lib/themes/vue.css" />
+		<link rel="stylesheet" href="//unpkg.com/docsify/lib/themes/vue.css" disabled/>
+
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify-darklight-theme@latest/dist/style.min.css" title="docsify-darklight-theme" type="text/css" />
+		
 		<style>
 			.markdown-section h1 code,
 			.markdown-section h2 code,
@@ -31,6 +34,7 @@
 		<div id="app"></div>
 		<script src="//unpkg.com/docsify/lib/docsify.min.js"></script>
 		<script src="//unpkg.com/docsify-edit-on-github/index.js"></script>
+		
 		<!-- Load syntax highlighters -->
 		<script src="//unpkg.com/prismjs/components/prism-bash.min.js"></script>
 		<script src="//unpkg.com/prismjs/components/prism-typescript.min.js"></script>
@@ -48,10 +52,11 @@
 				auto2top: true,
 				// coverpage: true,
 				// onlyCover: true,
-
+				
 				// Avoid collisions with other docs on the same domain
 				search: {
 					namespace: "iobroker-react",
+					noData: 'No Results!',
 				},
 
 				plugins: [
@@ -60,14 +65,51 @@
 						null,
 						null,
 					),
+					
 				],
 
 				"flexible-alerts": {
 					style: "flat",
 				},
+
+				darklightTheme: {
+					siteFont : "PT Sans",
+					defaultTheme : 'light',
+					// codeFontFamily : 'Roboto Mono, Monaco, courier, monospace',
+					// bodyFontSize : '22px',
+					dark: {
+						accent: '#ea6f5a',
+						toogleBackground : '#ffffff',
+						background: '#3f3f3f',
+						textColor: '#c8c8c8',
+						codeTextColor : '#657b83',
+						codeBackgroundColor : '#282828',
+						borderColor : 'rgba(0,0,0,0.22)',
+						blockQuoteColor : '#c8c8c8',
+						highlightColor : '#ea6f5a',
+						sidebarSublink : '#b4b4b4',
+						codeTypeColor : '#ffffff',
+					},
+					light: {
+						accent: '#ea6f5a',
+						toogleBackground : '#091a28',
+						background: '#ffffff',
+						textColor: '#000000',
+						codeTextColor : '#525252',
+						codeBackgroundColor : '#e7e7e7',
+						borderColor : 'rgba(0, 0, 0, 0.07)',
+						blockQuoteColor : '#858585',
+						highlightColor : '#ea6f5a',
+						sidebarSublink : '#464646',
+						codeTypeColor : '#091a28',
+					}
+				}
+				
 			};
 		</script>
+		<script src="//unpkg.com/docsify-copy-code"></script>
 		<script src="//unpkg.com/docsify/lib/plugins/search.min.js"></script>
 		<script src="//unpkg.com/docsify-plugin-flexible-alerts"></script>
+		<script src="//cdn.jsdelivr.net/npm/docsify-darklight-theme@latest/dist/index.min.js" type="text/javascript"></script>
 	</body>
 </html>
