@@ -7,6 +7,12 @@ This would normally be done by using the `onMouseEnter` and `onMouseLeave` event
 import { useHover } from "iobroker-react/hooks";
 ```
 
+## Parameters
+`useHover` takes a single parameter, which is a `React.RefObject` that points to the element that should be observed.
+
+## Return value
+`useHover` returns a boolean value that indicates whether the mouse is currently hovering over the element.
+
 ## Example
 
 ```tsx

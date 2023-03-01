@@ -1,5 +1,6 @@
-import { RefObject, useState } from "react";
-import { useWindowEvent } from "./useWindowEvent"; // need the new version of useWindowEvent
+import { RefObject, useEffect, useState } from "react";
+
+type HoverStatus = boolean;
 
 /**
  * Hook to react to mouseover and mouseout events of a specific element. Example:
@@ -36,18 +37,27 @@ import { useWindowEvent } from "./useWindowEvent"; // need the new version of us
  * };
  */
 
-export const useHover = (ref: RefObject<HTMLElement | undefined>) => {
-	const [hovered, setHovered] = useState(false);
+export const useHover = <T extends HTMLElement = HTMLElement>(
+	elementRef: RefObject<T>,
+): HoverStatus => {
+	const [hovered, setHovered] = useState<HoverStatus>(false);
 
-	useWindowEvent(
-		"mouseover",
-		() => setHovered(true),
-		ref.current ?? undefined,
-	);
-	useWindowEvent(
-		"mouseout",
-		() => setHovered(false),
-		ref.current ?? undefined,
-	);
+	const handleMouseOver = () => setHovered(true);
+	const handleMouseOut = () => setHovered(false);
+
+	useEffect(() => {
+		const node = elementRef.current;
+
+		if (node) {
+			node.addEventListener("mouseover", handleMouseOver);
+			node.addEventListener("mouseout", handleMouseOut);
+
+			return () => {
+				node.removeEventListener("mouseover", handleMouseOver);
+				node.removeEventListener("mouseout", handleMouseOut);
+			};
+		}
+	}, [elementRef]);
+
 	return hovered;
 };
