@@ -47,6 +47,11 @@ The `useIoBrokerState` hook allows you to read states from the ioBroker DB, subs
 Using the `useIoBrokerTheme` hook, you can determine which ioBroker theme is currently active and change it.  
 → [Documentation](hooks/useIoBrokerTheme.md)
 
+## `useTimeout` hook
+
+The `useTimeout` hook is used to create a timeout that can be cancelled.  
+→ [Documentation](hooks/useTimeout.md)
+
 ## `useWindowEvent` hook
 
 The `useWindowEvent` hook is used to subcribe to window events and react to them, like `"message"`, `"resize"`, etc.  

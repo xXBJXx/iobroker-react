@@ -26,66 +26,59 @@ interface TimeoutOptions {
 The useTimeout returns two functions that can be used to clear and reset the timer.
 
 ```ts
-interface TimeoutReturn {
-	/**
-	 * Clears the timeout.
-	 */
-	clear: () => void;
-	/**
-	 * Resets the timeout.
-	 */
-	reset: () => void;
+interface TimeoutFunctions {
+	clear: () => void; // The clear function that terminates the current timeout
+	reset: () => void; // The reset function that starts a new timeout
 }
 ```
 
 ## Example
 
 ```tsx
+import { Button, Typography } from "@mui/material";
+import { useState } from "react";
 import { useTimeout } from "iobroker-react/hooks";
 
 const MyComponent = () => {
-	const [count, setCount] = React.useState(20);
-	const [finished, setFinished] = React.useState(false);
-
-	// timeout
+	const [count, setCount] = useState(0);
+	const [isRunning, setIsRunning] = useState(true);
 	const { clear, reset } = useTimeout(() => {
-		if (count !== 0) {
-			setCount((c) => c - 1);
-			setFinished(false);
-			reset();
-		} else {
-			clear();
-			setFinished(true);
-		}
+		setCount((prevCount) => prevCount + 1);
+		reset();
 	}, 1000);
 
-	// reset timeout
-	const handleReset = () => {
+	const handleStart = () => {
+		setIsRunning(true);
 		reset();
-		setFinished(false);
-		setCount(20);
 	};
 
-	// clear timeout
-	const handleClear = () => {
+	const handleStop = () => {
+		setIsRunning(false);
 		clear();
-		setFinished(true);
+	};
+
+	const handleClear = () => {
+		setCount(0);
+		setIsRunning(false);
+		clear();
 	};
 
 	return (
-		<>
-			count:{count}
-			<br />
-			finished:{finished.toString()}
-			<Stack direction="row">
-				<Button variant={"contained"} onClick={handleClear}>
-					Clear Timeout
-				</Button>
-				<Button variant={"contained"} onClick={handleReset}>
-					Reset Timeout
-				</Button>
-			</Stack>
-		</>
+		<div>
+			<Typography variant="h3" component="div" sx={{ flexGrow: 1 }}>
+				Countdown: {count}
+			</Typography>
+			<Typography
+				variant="h6"
+				component="div"
+				sx={{ flexGrow: 1, color: isRunning ? "green" : "red" }}
+			>
+				{isRunning ? "Running" : "Stopped"}
+			</Typography>
+			{!isRunning && <Button onClick={handleStart}>Start</Button>}
+			{isRunning && <Button onClick={handleStop}>Stop</Button>}
+			<Button onClick={handleClear}>Clear</Button>
+		</div>
 	);
 };
 ```

@@ -27,5 +27,6 @@
     -   [useIoBrokerObject](hooks/useIoBrokerObject.md)
     -   [useIoBrokerState](hooks/useIoBrokerState.md)
     -   [useIoBrokerTheme](hooks/useIoBrokerTheme.md)
-    -   [useWindowEvent](hooks/useWindowEvent.md)
     -   [useTimeout](hooks/useTimeout.md)
+    -   [useWindowEvent](hooks/useWindowEvent.md)
+
