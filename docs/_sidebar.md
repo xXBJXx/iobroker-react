@@ -27,6 +27,7 @@
     -   [useIoBrokerObject](hooks/useIoBrokerObject.md)
     -   [useIoBrokerState](hooks/useIoBrokerState.md)
     -   [useIoBrokerTheme](hooks/useIoBrokerTheme.md)
+    -   [useTimeout](hooks/useTimeout.md)
     -   [useWindowEvent](hooks/useWindowEvent.md)
     -   [useHover](hooks/useHover.md)
     -   [useAsync](hooks/useAsync.md)
@@ -39,3 +40,4 @@
     -   [useArray](hooks/useArray.md)
     -   [useStorage](hooks/useStorage.md)
     -   [useDebounce](hooks/useDebounce.md)
+
