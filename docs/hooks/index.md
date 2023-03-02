@@ -12,6 +12,12 @@ The `useAdapter` hook is used to subscribe to the adapter's `alive` and `connect
 The `useConnection` hook provides access to the socket connection to the ioBroker backend.  
 → [Documentation](hooks/useConnection.md)
 
+## `useDebounce` hook
+
+The `useDebounce` hook can be used to debounce a function.
+
+→ [Documentation](hooks/useDebounce.md)
+
 ## `useDialogs` hook
 
 The `useDialogs` hook can be used to display simple [modal dialogs](https://material-ui.com/components/dialogs/) as well as [snackbar notifications](https://material-ui.com/components/snackbars/).  

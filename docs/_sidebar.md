@@ -20,6 +20,7 @@
     -   [Overview](hooks/index.md)
     -   [useAdapter](hooks/useAdapter.md)
     -   [useConnection](hooks/useConnection.md)
+	-   [useDebounce](hooks/useDebounce.md)
     -   [useDialogs](hooks/useDialogs.md)
     -   [useExpertMode](hooks/useExpertMode.md)
     -   [useGlobals](hooks/useGlobals.md)
@@ -28,4 +29,3 @@
     -   [useIoBrokerState](hooks/useIoBrokerState.md)
     -   [useIoBrokerTheme](hooks/useIoBrokerTheme.md)
     -   [useWindowEvent](hooks/useWindowEvent.md)
-    -   [useDebounce](hooks/useDebounce.md)

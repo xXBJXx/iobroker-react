@@ -29,29 +29,32 @@ interface UseDebounce {
 ```tsx
 import React, { useState } from "react";
 import { useDebounce } from "iobroker-react/hooks";
+import { Button, Stack, Typography } from "@mui/material";
 
 const ExampleComponent: React.FC = () => {
-	const [count, setCount] = React.useState(0);
-	const [confirms, setConfirms] = React.useState(0);
-	useDebounce(
-		() => {
-			setConfirms(count);
-			alert(count);
-		},
-		1000,
-		[count],
-	);
+	const [count, setCount] = useState(0);
+	const [confirms, setConfirms] = useState(0);
+
+	const handleConfirm = (count) => {
+		setConfirms(count);
+	};
+
+	useDebounce(() => handleConfirm(count), 1000, [count]);
+
+	const handleButtonClick = () => {
+		setCount((prevCount) => prevCount + 1);
+	};
 
 	return (
 		<>
-			count: {count}
-			<br />
-			confirms: {confirms}
+			<Typography variant="h3" component="div" sx={{ flexGrow: 1 }}>
+				Current count: {count}
+			</Typography>
+			<Typography variant="h3" component="div" sx={{ flexGrow: 1 }}>
+				Current confirms: {confirms}
+			</Typography>
 			<Stack spacing={2} direction="row">
-				<Button
-					variant={"contained"}
-					onClick={() => setCount((c) => c + 1)}
-				>
+				<Button variant={'contained'} onClick={handleButtonClick}>
 					Increment
 				</Button>
 			</Stack>
