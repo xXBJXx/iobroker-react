@@ -51,7 +51,7 @@ import { useCallback, useEffect, useRef } from "react";
 type TimeoutHandle = ReturnType<typeof setTimeout>;
 
 // Type definitions for the return objects of the hook
-interface TimeoutFunctions {
+export interface TimeoutFunctions {
 	reset: () => void; // The reset function that starts a new timeout
 	clear: () => void; // The clear function that terminates the current timeout
 }
