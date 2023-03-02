@@ -20,6 +20,7 @@
     -   [Overview](hooks/index.md)
     -   [useAdapter](hooks/useAdapter.md)
     -   [useConnection](hooks/useConnection.md)
+	-   [useDebounce](hooks/useDebounce.md)
     -   [useDialogs](hooks/useDialogs.md)
     -   [useExpertMode](hooks/useExpertMode.md)
     -   [useGlobals](hooks/useGlobals.md)
