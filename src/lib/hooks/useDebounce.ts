@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { TimeoutFunctions, useTimeout } from "./useTimeout";
+import { useTimeout } from "./useTimeout";
 
 //TODO: Attention: useDebounce requires the useTimeout hook to work properly.
 
@@ -50,7 +50,7 @@ export const useDebounce = (
 	callback: () => void,
 	delay: number,
 	dependencies: any[],
-): TimeoutFunctions["reset"] => {
+): void => {
 	const { reset, clear } = useTimeout(callback, delay);
 
 	// Reset the timer when dependencies change
